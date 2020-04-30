@@ -1,13 +1,16 @@
 import { Module, OnApplicationShutdown } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
 import * as Knex from 'knex';
-import { TracerModule } from '../tracing/tracer.module';
+import { TracerModule } from '../tracer/tracer.module';
+import { KnexConfigProvider } from './knex.config';
 import { KnexFactory } from './knex.factory';
+
+export { KnexConfig } from './knex.config';
 
 @Module({
   exports: [KnexFactory],
   imports: [TracerModule],
-  providers: [KnexFactory],
+  providers: [KnexFactory, KnexConfigProvider],
 })
 export class KnexModule implements OnApplicationShutdown {
   constructor(private readonly moduleRef: ModuleRef) {}

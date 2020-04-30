@@ -1,5 +1,5 @@
 {
-  "name": "nestjs-extra",
+  "name": "nestjs-rv-common",
   "version": "1.0.0",
   "description": "",
   "author": "",
@@ -36,43 +36,26 @@
     "sql-formatter": "2.3.3"
   },
   "peerDependencies": {
-    "@nestjs/common": "7.0.8",
-    "@nestjs/core": "7.0.8",
-    "@nestjs/microservices": "7.0.8",
-    "knex": "0.21.0",
-    "reflect-metadata": "0.1.13"
+    "@nestjs/common": "^7.0.9",
+    "@nestjs/core": "^7.0.9",
+    "@nestjs/microservices": "^7.0.9",
+    "knex": "^0.21.1",
+    "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
-    "@nestjs/testing": "7.0.8",
-    "@nestjs/common": "7.0.8",
-    "@nestjs/core": "7.0.8",
-    "@nestjs/microservices": "7.0.8",
-    "@types/node": "10.17.20",
+    "@nestjs/common": "7.0.9",
+    "@nestjs/core": "7.0.9",
+    "@nestjs/microservices": "7.0.9",
+    "@types/node": "10.17.21",
     "@types/pg": "7.14.3",
     "@types/pino": "6.0.0",
     "@typescript-eslint/eslint-plugin": "2.29.0",
     "@typescript-eslint/parser": "2.29.0",
     "eslint": "6.8.0",
     "eslint-config-prettier": "6.10.1",
-    "eslint-plugin-jest": "23.8.2",
-    "knex": "0.21.0",
+    "knex": "0.21.1",
     "jest": "25.4.0",
     "prettier": "2.0.4",
-    "ts-jest": "25.4.0",
     "typescript": "3.8.3"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
-    ],
-    "rootDir": "src",
-    "testRegex": ".spec.ts$",
-    "transform": {
-      "^.+\\.ts$": "ts-jest"
-    },
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
   }
 }

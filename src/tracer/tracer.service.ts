@@ -1,5 +1,4 @@
-import { Injectable, Module, OnApplicationShutdown } from '@nestjs/common';
-import { ModuleRef } from '@nestjs/core';
+import { Injectable } from '@nestjs/common';
 import { initTracerFromEnv, Tracer } from 'jaeger-client';
 import { Span, SpanContext, SpanOptions } from 'opentracing';
 
@@ -51,18 +50,5 @@ export class TracerService extends Tracer implements Tracer {
 
   protected _startSpan(name: string, fields: SpanOptions): Span {
     return this.tracer.startSpan(name, fields);
-  }
-}
-
-@Module({
-  exports: [TracerService],
-  providers: [TracerService],
-})
-export class TracerModule implements OnApplicationShutdown {
-  constructor(private readonly moduleRef: ModuleRef) {}
-
-  async onApplicationShutdown() {
-    const tracer = this.moduleRef.get(TracerService);
-    tracer.close();
   }
 }
