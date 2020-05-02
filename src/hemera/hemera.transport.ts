@@ -2,7 +2,6 @@ import { CustomTransportStrategy, Server } from '@nestjs/microservices';
 import { ERROR_EVENT, NATS_DEFAULT_URL } from '@nestjs/microservices/constants';
 import * as Nats from 'nats';
 import * as Hemera from 'nats-hemera';
-import { Observable } from 'rxjs';
 import { getHemeraConfig } from './hemera.config';
 
 export interface HemeraOptions {
@@ -44,22 +43,20 @@ export class HemeraTransport extends Server implements CustomTransportStrategy {
     }
   }
 
-  private async handleMessage(
+  private handleMessage(
     pattern: string,
     req: Hemera.ServerPattern,
+    done: Hemera.NodeCallback,
   ) {
     const handler = this.getHandlerByPattern(pattern);
     if (!handler) {
       throw new Error(`No handler for pattern: ${pattern}`);
     }
 
-    const res = await handler(req.payload, req);
-
-    if (res instanceof Observable) {
-      return res.toPromise();
-    } else {
-      return res;
-    }
+    handler(req.payload, req)
+      .then(res => this.transformToObservable(res))
+      .then(res$ => this.send(res$, data => done(data.err, data.response)))
+      .catch(err => done(err));
   }
 
   private setupMessageHandlers(callback: () => void) {
@@ -72,8 +69,8 @@ export class HemeraTransport extends Server implements CustomTransportStrategy {
 
   private bindMessageHandlers() {
     for (const pattern of this.messageHandlers.keys()) {
-      this.hemeraClient.add(JSON.parse(pattern), (req) =>
-        this.handleMessage(pattern, req),
+      this.hemeraClient.add(JSON.parse(pattern), (req, done) =>
+        this.handleMessage(pattern, req, done),
       );
     }
   }
