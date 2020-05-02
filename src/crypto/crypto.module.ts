@@ -10,18 +10,23 @@ const aesKeyLength = 256 / 8; // AES Key Length (bytes).
 const iVLength = 128 / 8; // Initialization Vector length (bytes).
 
 const xxx = 18;
-ok(process.env.smp_cryptoKeysDir, 'smp_cryptoKeysDir is not set');
-const dataPath = process.env.smp_cryptoKeysDir as string;
-const ngPrefix = '-' + 'no-' + 'git';
-const shmey = join(dataPath, 'par' + 'ams' + ngPrefix);
-const shmaswd = join(dataPath, 'par' + 'ams1' + ngPrefix);
 
 @Injectable()
 export class CryptoService {
   private readonly curIV: Buffer;
   private readonly curKey: Buffer;
 
+  private readonly shmey: string;
+  private readonly shmaswd: string;
+
   constructor() {
+    ok(process.env.smp_cryptoKeysDir, 'smp_cryptoKeysDir is not set');
+
+    const dataPath = process.env.smp_cryptoKeysDir as string;
+    const ngPrefix = '-' + 'no-' + 'git';
+    this.shmey = join(dataPath, 'par' + 'ams' + ngPrefix);
+    this.shmaswd = join(dataPath, 'par' + 'ams1' + ngPrefix);
+
     const { curIV, curKey } = this.loadPasswordAndKey();
     this.curIV = curIV;
     this.curKey = curKey;
@@ -67,7 +72,7 @@ export class CryptoService {
 
   private loadKey(password: Buffer) {
     const passwdBuf = Buffer.from(password);
-    const encrypted = readFileSync(shmey);
+    const encrypted = readFileSync(this.shmey);
     const decipher = crypto.createDecipher(aesAlgName, passwdBuf);
     const decrypted = Buffer.concat([
       decipher.update(encrypted),
@@ -85,7 +90,7 @@ export class CryptoService {
   }
 
   private loadPwd() {
-    const buf = readFileSync(shmaswd);
+    const buf = readFileSync(this.shmaswd);
     return this.convertBuf(buf);
   }
 }
