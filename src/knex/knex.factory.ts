@@ -56,11 +56,19 @@ export const KnexFactory = {
         });
 
         builder.queryContext({ knexSpan });
+
+        builder.on('query-error', (err) => {
+          if (knexSpan) {
+            knexSpan.setTag('error', true);
+            knexSpan.setTag('error.message', err.message);
+            knexSpan.log({ stack: err.stack });
+            knexSpan.finish();
+          }
+        })
       });
 
       db.on('query-response', (_response, _obj, builder) => {
-        const knexSpan =
-          builder._queryContext && builder._queryContext.knexSpan;
+        const knexSpan = builder._queryContext?.knexSpan;
 
         if (knexSpan) {
           knexSpan.finish();
