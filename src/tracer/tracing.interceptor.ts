@@ -65,8 +65,8 @@ export class TracingInterceptor implements NestInterceptor<unknown, unknown> {
         () => span.finish(),
         err => {
           span.setTag('error', true);
-          span.setTag('error.message', err.error && err.error.message);
-          span.log({ stack: err.error && err.error.stack });
+          span.setTag('error.message', err.message);
+          span.log({ stack: err.stack });
           span.finish();
           return err;
         },
