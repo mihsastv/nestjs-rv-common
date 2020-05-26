@@ -21,13 +21,24 @@ let SocketsService = class SocketsService {
         this.logger = logger;
         this.tracer = tracer;
     }
-    message(span, data) {
+    message(span, rootEventName, data) {
+        if (typeof rootEventName === 'string' && data) {
+            this.messageWithOptionalRootEventName(span, rootEventName, data);
+        }
+        else if (typeof rootEventName === 'object') {
+            this.messageWithOptionalRootEventName(span, undefined, rootEventName);
+        }
+        else {
+            throw new Error('Invalid SocketService.message call');
+        }
+    }
+    messageWithOptionalRootEventName(span, rootEventName, data) {
         data.spanContext = {};
         this.tracer.inject(span, opentracing_1.FORMAT_TEXT_MAP, data.spanContext);
         this.hemera
             .act({
             cmd: 'socketio',
-            data,
+            data: rootEventName ? Object.assign(Object.assign({}, data), { rootEventName$: rootEventName }) : data,
             topic: 'smp',
         })
             .catch(err => this.logger.warn(err));
