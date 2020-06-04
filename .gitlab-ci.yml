@@ -1,0 +1,2 @@
+include:
+  - remote: https://git.rvision.pro/RVisionAutomerge/ci-templates/raw/master/publish-npm-package.yml
