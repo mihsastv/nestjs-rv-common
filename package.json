@@ -1,6 +1,6 @@
 {
-  "name": "nestjs-rv-common",
-  "version": "1.0.0",
+  "name": "@r-vision/nestjs-rv-common",
+  "version": "0.2.0",
   "description": "",
   "author": "",
   "keywords": [
@@ -16,11 +16,11 @@
     "test": "tests"
   },
   "scripts": {
+    "prepublishOnly": "npm run lint && npm run test && npm run build",
     "build": "tsc",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "lint": "eslint --cache --ext .js,.ts src",
-    "format": "prettier --write \"src/**/*.ts\"",
-    "prepare": "npm run build"
+    "format": "prettier --write \"src/**/*.ts\""
   },
   "dependencies": {
     "jaeger-client": "3.17.2",
@@ -53,8 +53,9 @@
     "@typescript-eslint/parser": "2.29.0",
     "eslint": "6.8.0",
     "eslint-config-prettier": "6.10.1",
-    "knex": "0.21.1",
+    "eslint-plugin-jest": "^23.13.2",
     "jest": "25.4.0",
+    "knex": "0.21.1",
     "prettier": "2.0.4",
     "typescript": "3.8.3"
   }
