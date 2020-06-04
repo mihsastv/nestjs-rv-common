@@ -40,7 +40,7 @@ let NotificatorService = class NotificatorService {
         this.tracer.inject(span, opentracing_1.FORMAT_TEXT_MAP, payloadWithContext.spanContext);
         this.hemera
             .act({
-            cmd: `notifications:commit`,
+            cmd: `notifications:push`,
             payload: payloadWithContext,
             topic: 'notificator',
         })
