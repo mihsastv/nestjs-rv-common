@@ -51,7 +51,7 @@ export class NotificatorService {
 
     this.hemera
       .act({
-        cmd: `notifications:commit`,
+        cmd: `notifications:push`,
         payload: payloadWithContext,
         topic: 'notificator',
       })
