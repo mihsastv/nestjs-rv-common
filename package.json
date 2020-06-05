@@ -1,5 +1,5 @@
 {
-  "name": "@r-vision/assets-nestjs-common",
+  "name": "@r-vision/nestjs-common",
   "version": "0.2.2",
   "description": "",
   "author": "",
@@ -20,7 +20,8 @@
     "build": "tsc",
     "test": "jest --passWithNoTests",
     "lint": "eslint --cache --ext .js,.ts src",
-    "format": "prettier --write \"src/**/*.ts\""
+    "format": "prettier --write \"src/**/*.ts\"",
+    "prepare": "npm run build"
   },
   "dependencies": {
     "jaeger-client": "3.17.2",

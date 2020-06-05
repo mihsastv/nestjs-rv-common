@@ -1,4 +1,4 @@
-# nestjs-rv-common
+# @r-vision/nestjs-common
 
 ## Description
 
