@@ -24,6 +24,8 @@
     "prepare": "npm run build"
   },
   "dependencies": {
+    "@sentry/integrations": "5.15.5",
+    "@sentry/node": "5.15.5",
     "jaeger-client": "3.17.2",
     "nats": "1.4.8",
     "nats-hemera": "7.0.2",
