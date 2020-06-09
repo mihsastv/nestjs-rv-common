@@ -6,4 +6,5 @@ export { LoggerModule, Logger, LoggerInstance } from './logger/logger.module';
 export { TracerModule, TracerService, TracingInterceptor, Trace, ChildSpan, } from './tracer/tracer.module';
 export { SocketsModule, SocketsService } from './sockets/sockets.module';
 export { LogsModule, LogsService } from './logs/logs.module';
-export { NotificatorModule, NotificatorService } from './notificator/notificator.module';
+export { NotificatorModule, NotificatorService, } from './notificator/notificator.module';
+export { SentryInterceptor } from './sentry/sentry.interceptor';

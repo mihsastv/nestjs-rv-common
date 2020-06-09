@@ -30,4 +30,6 @@ exports.LogsService = logs_module_1.LogsService;
 var notificator_module_1 = require("./notificator/notificator.module");
 exports.NotificatorModule = notificator_module_1.NotificatorModule;
 exports.NotificatorService = notificator_module_1.NotificatorService;
+var sentry_interceptor_1 = require("./sentry/sentry.interceptor");
+exports.SentryInterceptor = sentry_interceptor_1.SentryInterceptor;
 //# sourceMappingURL=index.js.map

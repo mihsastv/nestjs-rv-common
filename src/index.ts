@@ -17,4 +17,8 @@ export {
 
 export { SocketsModule, SocketsService } from './sockets/sockets.module';
 export { LogsModule, LogsService } from './logs/logs.module';
-export { NotificatorModule, NotificatorService } from './notificator/notificator.module';
+export {
+  NotificatorModule,
+  NotificatorService,
+} from './notificator/notificator.module';
+export { SentryInterceptor } from './sentry/sentry.interceptor';
