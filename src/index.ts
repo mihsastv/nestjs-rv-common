@@ -28,6 +28,7 @@ export { UserId } from './auth/user.id.decorator';
 export {
   PermissionScopedType,
   PermissionType,
+  Permissions,
   PermissionsModule,
   PermissionsService,
 } from './permissions/permissions.module';
