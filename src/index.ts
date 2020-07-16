@@ -25,3 +25,9 @@ export { SentryInterceptor } from './sentry/sentry.interceptor';
 export { AuthGuard } from './auth/auth.guard';
 export { AuthorizeMiddleware } from './auth/authorize.middleware';
 export { UserId } from './auth/user.id.decorator';
+export {
+  PermissionScopedType,
+  PermissionType,
+  PermissionsModule,
+  PermissionsService,
+} from './permissions/permissions.module';

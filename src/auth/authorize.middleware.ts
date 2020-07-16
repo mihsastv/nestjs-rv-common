@@ -21,18 +21,15 @@ export class AuthorizeMiddleware implements NestMiddleware {
     next();
   }
 
-  private async getSessionData(
-    sid: string,
-  ): Promise<undefined | Session> {
-    const { data: session }: { data: Session } = await this.hemera
-      .act({
-        cmd: 'signed:get',
-        payload: {
-          sid,
-        },
-        timeout$: 60 * 1000,
-        topic: 'auth:session',
-      });
+  private async getSessionData(sid: string): Promise<undefined | Session> {
+    const { data: session } = await this.hemera.act<Session>({
+      cmd: 'signed:get',
+      payload: {
+        sid,
+      },
+      timeout$: 60 * 1000,
+      topic: 'auth:session',
+    });
 
     return session;
   }
