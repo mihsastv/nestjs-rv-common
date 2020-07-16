@@ -32,6 +32,7 @@ export {
   AssetsPermissions,
   UserPermissions,
   Permissions,
+  PermissionsMiddleware,
   PermissionsModule,
   PermissionsService,
 } from './permissions/permissions.module';
