@@ -5,8 +5,12 @@ export { PermissionsService } from './permissions.service';
 export {
   PermissionType,
   PermissionScopedType,
-  Permissions,
+  AssetsPermissions,
+  AssetsPermissionType,
+  Permissions as UserPermissions,
 } from './permissions.interface';
+export { Permissions } from './permissions.decorator';
+export { PermissionsMiddleware } from './permissions.middleware';
 
 @Module({
   exports: [PermissionsService],

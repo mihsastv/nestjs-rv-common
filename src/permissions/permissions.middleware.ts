@@ -11,7 +11,7 @@ interface UserProfile {
 }
 
 @Injectable()
-export class AuthorizeMiddleware implements NestMiddleware {
+export class PermissionsMiddleware implements NestMiddleware {
   constructor(@Inject('Hemera') private readonly hemera: Hemera<{}, {}>) {}
 
   async use(req: Request, _res: Response, next: Function) {
