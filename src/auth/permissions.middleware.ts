@@ -1,14 +1,8 @@
 import { Inject, Injectable, NestMiddleware } from '@nestjs/common';
 import { Request, Response } from 'express';
 import Hemera from 'nats-hemera';
-import { Permissions, Role } from './permissions.interface';
-
-interface UserProfile {
-  fio: string;
-  id: number;
-  login: string;
-  roles: Role[];
-}
+import { Permissions } from './permissions.interface';
+import { Role, UserProfile } from './profile.interface';
 
 @Injectable()
 export class PermissionsMiddleware implements NestMiddleware {
@@ -18,15 +12,11 @@ export class PermissionsMiddleware implements NestMiddleware {
     const userId = req.userId;
 
     if (userId) {
-      req.permissions = await this.getUserPermissions(userId);
+      req.user = await this.getProfile(userId);
+      req.permissions = await this.getPermissions(req.user.roles);
     }
 
     next();
-  }
-
-  async getUserPermissions(userId: number): Promise<Permissions> {
-    const profile = await this.getProfile(userId);
-    return this.getPermissions(profile.roles);
   }
 
   async getPermissions(roles: Role[]): Promise<Permissions> {

@@ -25,14 +25,11 @@ export { SentryInterceptor } from './sentry/sentry.interceptor';
 export { AuthGuard } from './auth/auth.guard';
 export { AuthorizeMiddleware } from './auth/authorize.middleware';
 export { UserId } from './auth/user.id.decorator';
+export { PermissionsMiddleware } from './auth/permissions.middleware';
+export { Permissions } from './auth/permissions.decorator';
+export { User } from './auth/user.decorator';
 export {
-  PermissionScopedType,
-  PermissionType,
-  AssetsPermissionType,
-  AssetsPermissions,
-  UserPermissions,
-  Permissions,
-  PermissionsMiddleware,
-  PermissionsModule,
-  PermissionsService,
-} from './permissions/permissions.module';
+  UserProfile,
+  Role,
+  RoleAccessPermission,
+} from './auth/profile.interface';

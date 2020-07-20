@@ -1,6 +1,7 @@
 declare namespace Express {
   export interface Request {
     userId?: number;
-    permissions?: import('../permissions/permissions.interface').Permissions;
+    user?: import('../auth/profile.interface').UserProfile;
+    permissions?: import('../auth/permissions.interface').Permissions;
   }
 }
