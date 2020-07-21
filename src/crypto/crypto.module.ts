@@ -8,7 +8,8 @@ import { join } from 'path';
 const aesAlgName = 'aes256'; // Ciphering algorithm name.
 const aesKeyLength = 256 / 8; // AES Key Length (bytes).
 const iVLength = 128 / 8; // Initialization Vector length (bytes).
-
+const nonStrictDbEncryption = process.env.DEF_NON_STRICT_DB_ENCRYPTION;
+const prefix = '#$*';
 const xxx = 18;
 
 @Injectable()
@@ -32,7 +33,7 @@ export class CryptoService {
     this.curKey = curKey;
   }
 
-  decryptString(str: string) {
+  decryptString(str: string): string {
     const decipher = crypto.createDecipheriv(
       aesAlgName,
       this.curKey,
@@ -55,6 +56,34 @@ export class CryptoService {
         const decryptedValue = this.decryptString(value);
 
         set(result, key, decryptedValue);
+      }
+    }
+
+    return result;
+  }
+
+  encryptString(str: string): string {
+    if (nonStrictDbEncryption && str.startsWith(prefix)) {
+      // don't encrypt encrypted data.
+      return str;
+    }
+
+    const cipher = crypto.createCipheriv(aesAlgName, this.curKey, this.curIV);
+    let encrypted = cipher.update(str, 'utf8', 'base64');
+    encrypted += cipher.final('base64');
+    encrypted = prefix + encrypted;
+
+    return encrypted;
+  }
+
+  encrypt<T extends object, K extends keyof T>(data: T, keys: K[]): T {
+    const result = { ...data };
+
+    for (const key of keys) {
+      const value = get(data, key);
+
+      if (value && typeof value === 'string') {
+        set(result, key, this.encryptString(value));
       }
     }
 
