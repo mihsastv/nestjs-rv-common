@@ -31,5 +31,6 @@ export interface UserProfile {
   login: string;
   roles: Role[];
   companies_id: number[];
+  tz: string;
   all_companies: boolean;
 }
