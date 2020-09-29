@@ -11,6 +11,10 @@ export class Logger implements LoggerService {
   constructor() {
     this.logger = pino(
       {
+        customLevels: {
+          verbose: 25,
+          silly: 5,
+        },
         // TODO Нету в @types/pino , когда поправят можно будет убрать
         // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
         // @ts-ignore
