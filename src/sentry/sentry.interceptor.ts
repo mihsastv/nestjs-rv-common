@@ -35,6 +35,9 @@ export class SentryInterceptor implements NestInterceptor {
         ],
         release: `${this.config.releaseName}@${this.config.releaseVersion}`,
       });
+      Sentry.configureScope((scope) => {
+        scope.setTags(this.tags);
+      });
     }
   }
 
