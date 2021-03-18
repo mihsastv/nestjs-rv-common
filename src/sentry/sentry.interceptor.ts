@@ -33,6 +33,7 @@ export class SentryInterceptor implements NestInterceptor {
             root: this.config.rootDir,
           }),
         ],
+        maxValueLength: this.config.maxValueLength,
         release: `${this.config.releaseName}@${this.config.releaseVersion}`,
       });
       Sentry.configureScope((scope) => {
