@@ -18,7 +18,9 @@ export class KnexConfigProvider {
 
   getKnexConfig() {
     return {
-      asyncStackTraces: process.env.NODE_ENV !== 'production',
+      asyncStackTraces:
+        process.env.NODE_ENV !== 'production' ||
+        Boolean(process.env.smp_sentry__dsn),
       client: 'pg',
       connection: {
         database: process.env.smp_db__name,
