@@ -7,6 +7,7 @@ const {
   SMP_SERVICE_NAME,
   cwd,
   smp_sentry__dsn,
+  smp_sentry__maxlen,
 } = process.env;
 
 export function getSentryConfig(): SentryConfig {
@@ -14,6 +15,7 @@ export function getSentryConfig(): SentryConfig {
     dsn: smp_sentry__dsn,
     enabled: Boolean(smp_sentry__dsn),
     hostname: HOSTNAME,
+    maxValueLength: Number(smp_sentry__maxlen) || 5000,
     releaseName: RELEASE_NAME,
     releaseVersion: RELEASE_VERSION,
     rootDir: cwd,

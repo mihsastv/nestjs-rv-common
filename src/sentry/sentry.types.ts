@@ -6,4 +6,5 @@ export interface SentryConfig {
   releaseVersion?: string;
   rootDir?: string;
   serviceName?: string;
+  maxValueLength?: number;
 }
