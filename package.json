@@ -1,6 +1,6 @@
 {
   "name": "@r-vision/nestjs-common",
-  "version": "0.5.11",
+  "version": "0.5.12",
   "description": "",
   "author": "",
   "keywords": [
@@ -31,6 +31,7 @@
     "nats-hemera": "7.0.2",
     "opentracing": "0.14.4",
     "pg": "8.5.1",
+    "pg-query-stream": "4.1.0",
     "pino": "6.2.0",
     "pino-pretty": "4.0.0",
     "pretty-hrtime": "1.0.3",
