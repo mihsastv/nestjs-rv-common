@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
-import * as Knex from 'knex';
 import { getLocaleConfig, Lang } from './locale.config';
+import { Knex } from 'knex';
 
 @Injectable()
 export class LocaleService {
