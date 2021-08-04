@@ -61,16 +61,16 @@ export class TracingInterceptor implements NestInterceptor<unknown, unknown> {
     }
 
     return next.handle().pipe(
-      tap(
-        () => span.finish(),
-        err => {
-          span.setTag('error', true);
-          span.setTag('error.message', err.message);
-          span.log({ stack: err.stack });
-          span.finish();
-          return err;
-        },
-      ),
+      tap({
+            error: err => {
+              span.setTag('error', true);
+              span.setTag('error.message', err.message);
+              span.log({ stack: err.stack });
+              span.finish();
+              return err;
+            },
+            next: () => span.finish(),
+        }),
     );
   }
 }

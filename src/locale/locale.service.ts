@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import * as Knex from 'knex';
+import { Knex } from 'knex';
 import { getLocaleConfig, Lang } from './locale.config';
 
 @Injectable()

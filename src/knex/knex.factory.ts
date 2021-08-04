@@ -1,8 +1,8 @@
-import * as Knex from 'knex';
 import { Tracer } from 'opentracing';
 import * as sqlFormatter from 'sql-formatter';
 import { TracerService } from '../tracer/tracer.module';
 import { KnexConfigProvider } from './knex.config';
+import knex, { Knex } from 'knex';
 
 function getSpanNameFromQueryContext(queryContext) {
   let spanName = 'knex';
@@ -19,7 +19,7 @@ export const KnexFactory = {
   inject: [TracerService, KnexConfigProvider],
   provide: 'Knex',
   useFactory: (tracer: Tracer, configProvider: KnexConfigProvider): Knex => {
-    const db = Knex(configProvider.getKnexConfig());
+    const db = knex(configProvider.getKnexConfig());
 
     if (String(process.env.JAEGER_DISABLED).toLowerCase() === 'false') {
       db.on('start', builder => {
