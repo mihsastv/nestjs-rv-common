@@ -2,7 +2,8 @@ import { Tracer } from 'opentracing';
 import * as sqlFormatter from 'sql-formatter';
 import { TracerService } from '../tracer/tracer.module';
 import { KnexConfigProvider } from './knex.config';
-import knex, { Knex } from 'knex';
+import knex, {Knex} from 'knex';
+
 
 function getSpanNameFromQueryContext(queryContext) {
   let spanName = 'knex';

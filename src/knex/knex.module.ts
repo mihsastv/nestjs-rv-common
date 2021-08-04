@@ -1,9 +1,9 @@
 import { Module, OnApplicationShutdown } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
-import { Knex } from 'knex';
 import { TracerModule } from '../tracer/tracer.module';
 import { KnexConfigProvider } from './knex.config';
 import { KnexFactory } from './knex.factory';
+import { Knex } from 'knex';
 
 export { KnexConfig } from './knex.config';
 
